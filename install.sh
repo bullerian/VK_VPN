@@ -2,7 +2,7 @@
 
 #Description: VK_VPN service install script
 #Dependencies: openvpn, opera
-declare -a dependencies=( 'openvpn' 'opera' )
+declare -a dependencies=( 'openvpn' 'opera-stable' )
 
 #User have to be logged as root
 if [ $(id -u) -gt 0 ]; then
@@ -38,11 +38,20 @@ Terminating."
   fi
 }
 
+#Add Opera deb repo, update packages list
+addOperaRepo(){
+  echo "Adding Opera repository"
+  add-apt-repository 'deb https://deb.opera.com/opera-stable/ stable non-free'
+  wget -qO- https://deb.opera.com/archive.key | apt-key add -
+  apt-get update
+}
+
 #Greeting message
 echo -e "VK_VPN service installer script\n"
 
 #List dependencies
 echo "Trying to resolve VK_VPN service dependencies:"
+addOperaRepo
 for pkg in ${dependencies[*]}; do
   installPackage "$pkg"
 done
