@@ -58,10 +58,12 @@ fi
 
 #List dependencies
 echo "Trying to resolve VK_VPN service dependencies:"
+
 #Call function to add Opera deb repo to repos list
 addOperaRepo
 
 #Check and install all packages from the "dependencies" array
+
 for pkg in ${dependencies[*]}; do
   installPackage "$pkg"
 done
