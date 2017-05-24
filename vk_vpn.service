@@ -1,0 +1,11 @@
+[Unit]
+Description=OpenVPN&Opera service for vk.com access
+
+[Service]
+Type=oneshot
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=$HOME/.Xauthority"
+ExecStart=/bin/sh -c "opera vk.com"
+
+[Install]
+WantedBy=graphical.target
